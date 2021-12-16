@@ -107,7 +107,83 @@ if __name__ == '__main__':
 
 ```
 
-备注：生成requirements.txt 
+0.备注：
+
+1.生成requirements.txt 
 pip3 freeze > requirements.txt
+
+2.selenium的webdriver问题
+
+	0.DeprecationWarning: executable_path has been deprecated selenium python
+	# pip install webdriver-manager
+	from selenium import webdriver
+	from selenium.webdriver.chrome.service import Service
+	from webdriver_manager.chrome import ChromeDriverManager
+	from selenium.webdriver.common.by import By
+
+	s=Service(ChromeDriverManager().install())
+	driver = webdriver.Chrome(service=s)
+	driver.maximize_window()
+	driver.get('https://www.google.com')
+	driver.find_element(By.NAME, 'q').send_keys('Yasser Khalil')
+
+	1.DeprecationWarning: find_element_by_* commands are deprecated. Please use find_element() instead
+	Solution
+	Instead you have to use find_element(). As an example:
+
+	You have to include the following imports
+
+	from selenium.webdriver.common.by import By
+
+	Using class_name:
+
+	button = driver.find_element_by_class_name("quiz_button")
+	Needs be replaced with:
+
+	button = driver.find_element(By.CLASS_NAME, "quiz_button")
+	In similar lines you also have to change the following:
+
+	Using id:
+
+	element = find_element_by_id("element_id")
+	Needs be replaced with:
+
+	element = driver.find_element(By.ID, "element_id")
+	Using name:
+
+	element = find_element_by_name("element_name")
+	Needs be replaced with:
+
+	element = driver.find_element(By.NAME, "element_name")
+	Using link_text:
+
+	element = find_element_by_link_text("element_link_text")
+	Needs be replaced with:
+
+	element = driver.find_element(By.LINK_TEXT, "element_link_text")
+	Using partial_link_text:
+
+	element = find_element_by_partial_link_text("element_partial_link_text")
+	Needs be replaced with:
+
+	element = driver.find_element(By.PARTIAL_LINK_TEXT, "element_partial_link_text")
+	Using tag_name:
+
+	element = find_element_by_tag_name("element_tag_name")
+	Needs be replaced with:
+
+	element = driver.find_element(By.TAG_NAME, "element_tag_name")
+	Using css_selector:
+
+	element = find_element_by_css_selector("element_css_selector")
+	Needs be replaced with:
+
+	element = driver.find_element(By.CSS_SELECTOR, "element_css_selector")
+	Using xpath:
+
+	element = find_element_by_xpath("element_xpath")
+	Needs be replaced with:
+
+	element = driver.find_element(By.XPATH, "element_xpath")
 
 ```
